@@ -34,16 +34,6 @@ function printQuestionMarks(num) {
     return arr.toString();
   }
 
-// var orm = {
-
-// selectAll: "",
-
-// insertOne: "",
-
-// updateOne: ""
-
-// };
-
 var orm = {
     selectAll: function(tableInput, burger) {
       var queryString = "SELECT * FROM " + tableInput + ";";
@@ -55,10 +45,58 @@ var orm = {
       });
     },
 
+    insertOne: function(table, cols, vals, burger) {
+      var queryString = "INSERT INTO " + table;
+  
+      queryString += " (";
+      queryString += cols.toString();
+      queryString += ") ";
+      queryString += "VALUES (";
+      queryString += printQuestionMarks(vals.length);
+      queryString += ") ";
+  
+      console.log(queryString);
+  
+      connection.query(queryString, vals, function(err, result) {
+        if (err) {
+          throw err;
+        }
+  
+        burger(result);
+      });
+    },
+    // An example of objColVals would be {name: panther, sleepy: true}
+    updateOne: function(table, objColVals, condition, burger) {
+      var queryString = "UPDATE " + table;
+  
+      queryString += " SET ";
+      queryString += objToSql(objColVals);
+      queryString += " WHERE ";
+      queryString += condition;
+  
+      console.log(queryString);
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+  
+        burger(result);
+      });
+    },
 
-
-
-
-};
+    delete: function(table, condition, burger) {
+      var queryString = "DELETE FROM " + table;
+      queryString += " WHERE ";
+      queryString += condition;
+  
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+  
+        burger(result);
+      });
+    }
+  };
 // Export the orm object for the model (cat.js).
 module.exports = orm;
