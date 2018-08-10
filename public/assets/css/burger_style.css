@@ -1,0 +1,12 @@
+.jumbotron {
+    background-image: url('#');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 250px;
+    text-align: center;
+    }
+
+.form {
+        text-align: center;
+    }

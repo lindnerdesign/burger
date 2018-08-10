@@ -1,42 +1,54 @@
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
-  $(".change-sleep").on("click", function(event) {
-    var id = $(this).data("id");
-    var newSleep = $(this).data("newsleep");
+$(document).ready(function() {
 
-    var newBurgerState = {
-      burger: newBurger
-    };
+  $(".eatBurger").on("click", function(event) {
+      event.preventDefault();
+      var id = $(this).attr("data-id");
+      var objColVals = {
+          devoured: true
+      };
 
-    // Send the PUT request.
-    $.ajax("/" + id, {
-      type: "PUT",
-      data: newBurger
-    }).then(
-      function() {
-        console.log("changed to: ", newBurger);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
+      $.ajax("/api/burgers/" + id, {
+          type: "POST",
+          data: objColVals
+      }).then(
+          function() {
+              console.log("burger devoured", id);
+              location.reload();
+          }
+      );
   });
 
-  $(".create-form").on("submit", function(event) {
+  $(".delBurger").on("click", function(event) {
+    event.preventDefault();
+    var id = $(this).attr("data-id");
+    
+    $.ajax({
+        method: "DELETE",
+        url: '/api/burgers/' + id
+
+    }).then(
+        function() {
+            console.log("burger deleted", id);
+            location.reload();
+        }
+    );
+});
+
+  $(".create-update-form").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
     var newBurger = {
-      name: $("#ca").val().trim(),
-      devoured: $("[name=sleepy]:checked").val().trim()
+      burger_name: $("#newBurger").val().trim(),
     };
 
     // Send the POST request.
-    $.ajax("/", {
-      type: "POST",
-      data: newBurger
-    }).then(
+    $.post(
+     "/api/burgers"
+
+    ,newBurger).then(
       function() {
-        console.log("created new burger");
+        console.log("Created new burger");
         // Reload the page to get the updated list
         location.reload();
       }

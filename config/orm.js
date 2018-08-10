@@ -1,5 +1,5 @@
 // Import MySQL connection.
-var connection = require("../config/connection.js");
+var connection = require("../config/connection");
 
 function printQuestionMarks(num) {
     var arr = [];
@@ -35,18 +35,19 @@ function printQuestionMarks(num) {
   }
 
 var orm = {
-    selectAll: function(tableInput, burger) {
-      var queryString = "SELECT * FROM " + tableInput + ";";
+    selectAll: function(table, cb) {
+      var queryString = "SELECT * FROM burgers";
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;
         }
-        burger(result);
+        cb(result);
+        // console.log(result);
       });
     },
 
-    insertOne: function(table, cols, vals, burger) {
-      var queryString = "INSERT INTO " + table;
+    insertOne: function(table, cols, vals, cb) {
+      var queryString = "INSERT INTO burgers";
   
       queryString += " (";
       queryString += cols.toString();
@@ -62,11 +63,11 @@ var orm = {
           throw err;
         }
   
-        burger(result);
+        cb(result);
       });
     },
     // An example of objColVals would be {name: panther, sleepy: true}
-    updateOne: function(table, objColVals, condition, burger) {
+    updateOne: function(table, objColVals, condition, cb) {
       var queryString = "UPDATE " + table;
   
       queryString += " SET ";
@@ -80,11 +81,11 @@ var orm = {
           throw err;
         }
   
-        burger(result);
+        cb(result);
       });
     },
 
-    delete: function(table, condition, burger) {
+    delete: function(table, condition, cb) {
       var queryString = "DELETE FROM " + table;
       queryString += " WHERE ";
       queryString += condition;
@@ -94,7 +95,7 @@ var orm = {
           throw err;
         }
   
-        burger(result);
+        cb(result);
       });
     }
   };
