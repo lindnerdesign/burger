@@ -1,12 +1,37 @@
-.jumbotron {
-    background-image: url('#');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 250px;
-    text-align: center;
-    }
-
 .form {
         text-align: center;
+        margin-top: 25px;
     }
+
+#header {
+    margin-top: 75px;
+}
+
+.menu {
+    margin: 25px 0px 20px 50px;
+}
+
+.eatBurger {
+    margin: 5px 15px 15px 50px;
+}
+
+.delBurger {
+    margin: 5px 15px 15px 50px;
+}
+
+.container{
+margin-left: 50px;
+}
+
+#create {
+    margin-bottom: 50px;
+}
+
+.grill {
+    margin: 0px 15px 0px 0px;
+}
+
+.logo {
+    width: 250px;
+    margin-top: -75px;
+}
