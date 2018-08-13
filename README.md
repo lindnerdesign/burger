@@ -5,7 +5,7 @@ Burger logger with MySQL, Node, Express, Handlebars and a homemade ORM. Node and
 
 **Burger Time**
 
-![Burger Time Screen](./assets/images/burgertimeReadme.jpg)
+![Burger Time Screen](../assets/images/burgertimeReadme.jpg)
 
 [Video Full Project](https://lindnerdesign.github.io)
 
