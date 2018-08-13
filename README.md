@@ -15,6 +15,10 @@ Burger logger with MySQL, Node, Express, Handlebars and a homemade ORM. Node and
 * Node.js
 * Javascript
 * mySQL
+* Express.js
+* Heroku
 * Handlebars
+* JawsDB
 * Path
 * Body-parser
+
